@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WingObjectPoolManager
+public class WingObjectPoolManager : MonoBehaviour
 {
 
-    private static IObjectPool objectPool = new StackObjectPool();
+    private IObjectPool objectPool = new StackObjectPool();
 
-    public static bool IsItemAtPool { get => !objectPool.IsPoolEmpty; }
+    public bool IsItemAtPool { get => !objectPool.IsPoolEmpty; }
 
-    public static Transform Take()
+    public Transform Take()
     {
         return objectPool.TakeFromPool();
     }
-    public static void Add(Transform _transform)
+    public void Add(Transform _transform)
     {
         objectPool.AddToPool(_transform);
     }

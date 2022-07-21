@@ -5,6 +5,7 @@ using UnityEngine;
 //Added on character
 public class WingManager : MonoBehaviour
 {
+    WingObjectPoolManager wingObjectPoolManager;
 
     [SerializeField] private GameObject wingPrefab;
     [SerializeField] private GameObject wingsContainer;//select transform on character
@@ -32,6 +33,7 @@ public class WingManager : MonoBehaviour
 
     private void Awake()
     {
+        wingObjectPoolManager = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<WingObjectPoolManager>();
         wingSizeX = wingPrefab.transform.localScale.x;
     }
     private void Start()
@@ -53,10 +55,10 @@ public class WingManager : MonoBehaviour
     public void GenerateWings()
     {
         GameObject leftWing, rightWing;
-        if (WingObjectPoolManager.IsItemAtPool)  //take from object pool
+        if (wingObjectPoolManager.IsItemAtPool)  //take from object pool
         {
-            leftWing = WingObjectPoolManager.Take().gameObject;
-            rightWing = WingObjectPoolManager.Take().gameObject;
+            leftWing = wingObjectPoolManager.Take().gameObject;
+            rightWing = wingObjectPoolManager.Take().gameObject;
             leftWing.SetActive(true);
             rightWing.SetActive(true);
 
